@@ -1,0 +1,12 @@
+{
+  "name": "package",
+  "version": "0.0.0",
+  "dependencies": {
+  	"requirejs":null,
+	"bootstrap":null,
+	"underscore":null,
+	"backbone":null,
+	"jquery":null
+  }
+}
+
