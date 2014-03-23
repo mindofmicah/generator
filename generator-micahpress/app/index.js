@@ -18,8 +18,10 @@ var MicahpressGenerator = yeoman.generators.Base.extend({
 		var done = this.async();
 		console.log('--Installing Laravel--');
 		exec('composer create-project laravel/laravel . --prefer-dist', function (a,b,c) {
+	
+	
 		
-		console.log('--Laravel Installed--');
+	console.log('--Laravel Installed--');
 			done();
 		})
 			},
@@ -28,6 +30,7 @@ var MicahpressGenerator = yeoman.generators.Base.extend({
 		this.mkdir('public/js/lib');
 		this.mkdir('public/js/src');
 		this.mkdir('public/js/test');
+		this.mkdir('app/config/local/');
 	},
 	copyJSFiles : function () {
 //		this.cp('_package.json','package.json');
@@ -35,10 +38,31 @@ var MicahpressGenerator = yeoman.generators.Base.extend({
 
 	},
 	installJSDependencies : function () {
-		console.log('Installing Bower components');
+		console.log('--Installing Bower components--');
 		this.copy('_bower.json','bower.json');
 		this.copy('_bowerrc','.bowerrc');
 		this.bowerInstall();
+	},
+	addGenerators : function () {
+console.log('--Install JeffreyWay Generators--');
+var done = this.async;
+		var copy = this.copy;
+		exec('composer require way/generators:*', function (a,b,c) {
+			console.log(a);
+			console.log(b);
+			console.log(c);
+			
+		done();
+		});
+		this.mkdir('app/config/local/');
+		this.copy('_config-app.php', 'app/config/local/app.php');
+		
+	},
+	addFaker : function () {
+		console.log('--Install Faker library--');
+		var done = this.async;
+
+		exec('composer require fzaninotto/faker:*', function () {done()});
 	}
 });
 
