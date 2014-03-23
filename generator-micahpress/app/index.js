@@ -63,6 +63,11 @@ var done = this.async;
 		var done = this.async;
 
 		exec('composer require fzaninotto/faker:*', function () {done()});
+	},
+	setUpVagrant : function () {
+		console.log('--set up vagrant files--');
+		this.copy('_Vagrantfile', 'Vagrantfile');
+		this.copy('_install.sh','install.sh');
 	}
 });
 
